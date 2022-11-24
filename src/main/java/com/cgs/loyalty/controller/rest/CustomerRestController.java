@@ -23,54 +23,90 @@ public class CustomerRestController {
 	private LoyaltyCustomerService loyaltyCustomerService;
 
 	// Register a customer into Loyalty program
-	
+
 	@PostMapping("/register")
 	public ResponseEntity<?> registerLoyaltyCustomer(@RequestBody LoyaltyCustomerDetails customer) {
 		try {
 			LoyaltyCustomerDetails savedCustomer = loyaltyCustomerService.save(customer);
 			return new ResponseEntity<LoyaltyCustomerDetails>(savedCustomer, HttpStatus.CREATED);
-		} 
-		catch (BusinessException e) {
+		} catch (BusinessException e) {
 			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			ControllerException ce = new ControllerException("611", "something went wrong in controller");
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	// Get Customers
-	
+
 	@GetMapping("/customers")
-	public ResponseEntity<List<LoyaltyCustomerDetails>> getAllCustomer(){
+	public ResponseEntity<List<LoyaltyCustomerDetails>> getAllCustomer() {
+		try {
 			List<LoyaltyCustomerDetails> customer = loyaltyCustomerService.getAllCustomer();
-			return new ResponseEntity<List<LoyaltyCustomerDetails>>(customer,HttpStatus.FOUND);		
+			return new ResponseEntity<List<LoyaltyCustomerDetails>>(customer, HttpStatus.FOUND);
+
+		} catch (BusinessException e) {
+			 new ControllerException(e.getErrorCode(), e.getErrorMessage());
+			return new ResponseEntity<List<LoyaltyCustomerDetails>>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
-	// Get Customer
 	
+
+	// Get Customer
+
 	@GetMapping("/customer/{customerId}")
-	public ResponseEntity<LoyaltyCustomerDetails> getCustomer(@PathVariable ("customerId") String customerId){
-		LoyaltyCustomerDetails customer = loyaltyCustomerService.getCustomer(customerId);
-		return new ResponseEntity<LoyaltyCustomerDetails>(customer,HttpStatus.FOUND);
-		
+	public ResponseEntity<?> getCustomer(@PathVariable("customerId") String customerId) {
+		try {
+			LoyaltyCustomerDetails customer = loyaltyCustomerService.getCustomer(customerId);
+			return new ResponseEntity<LoyaltyCustomerDetails>(customer, HttpStatus.FOUND);
+		} catch (BusinessException e) {
+			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		} 
+		catch (Exception e) {
+			ControllerException ce = new ControllerException("622",
+					"something went wrong in controller while fetching");
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		}
+
 	}
 
 	// Update Customer
-	
+
 	@PutMapping("/update")
-	public ResponseEntity<LoyaltyCustomerDetails> updateCustomer(@RequestBody LoyaltyCustomerDetails customer){
-		LoyaltyCustomerDetails savedCustomer =loyaltyCustomerService.addCustomer(customer);
-		return new ResponseEntity<LoyaltyCustomerDetails>(savedCustomer,HttpStatus.CREATED);
+	public ResponseEntity<?> updateCustomer(@RequestBody LoyaltyCustomerDetails customer) {
+		try {
+			LoyaltyCustomerDetails savedCustomer = loyaltyCustomerService.updateCustomer(customer);
+			return new ResponseEntity<LoyaltyCustomerDetails>(savedCustomer, HttpStatus.CREATED);
+		} catch (BusinessException e) {
+			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			ControllerException ce = new ControllerException("622",
+					"something went wrong in controller while updating");
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 
 	// Delete Customer
-	
+
 	@DeleteMapping("/delete/{customerId}")
-	public ResponseEntity<Void> deleteCustomerById(@PathVariable ("customerId") String customerId){
-		loyaltyCustomerService.deleteById(customerId);
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<?> deleteCustomerById(@PathVariable("customerId") String customerId) {
+		try {
+			loyaltyCustomerService.deleteById(customerId);
+			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		} catch (BusinessException e) {
+			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			ControllerException ce = new ControllerException("622",
+					"something went wrong in controller while deleting");
+			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
+		}
+
 	}
 
 }

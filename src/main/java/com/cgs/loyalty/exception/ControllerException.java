@@ -9,7 +9,7 @@ public class ControllerException {
 	private String errorMessage;
 	
 	public ControllerException(String errorCode, String errorMessage) {
-		super();
+		
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 	}

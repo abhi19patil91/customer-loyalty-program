@@ -16,7 +16,7 @@ public interface LoyaltyCustomerService {
 	public LoyaltyCustomerDetails getCustomer(String customerId);
 
 	// Update Customer
-	public LoyaltyCustomerDetails addCustomer(LoyaltyCustomerDetails customer);
+	public LoyaltyCustomerDetails updateCustomer(LoyaltyCustomerDetails customer);
 	
 	// Delete Customer
 	public void deleteById(String customerId);
