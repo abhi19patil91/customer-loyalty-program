@@ -41,20 +41,7 @@ public class LoyaltyCustomerServiceImp implements LoyaltyCustomerService {
 		}
 		}
 
-//		if (customer.getCustomerId().matches(regaxId)) {
-//			try {
-//
-//				LoyaltyCustomerDetails savedCustomer = customerLoyaltyRepository.save(customer);
-//				return savedCustomer;
-//			} catch (IllegalArgumentException e) {
-//				throw new BusinessException("302 ", "given Customer is null");
-//			} catch (Exception e) {
-//				throw new BusinessException("303", "something went wrong in service layer while saving the Customer ");
-//			}
-//		} else {
-//			throw new BusinessException("301", "Please provide currect id like it contains only 4 digit numbers !!");
-//		}
-//	}
+
 
 	@Override
 	public List<LoyaltyCustomerDetails> getAllCustomer() {
