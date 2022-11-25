@@ -33,7 +33,7 @@ public class CustomerRestController {
 			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			ControllerException ce = new ControllerException("611", "something went wrong in controller");
+			ControllerException ce = new ControllerException("601", "something went wrong in controller");
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -52,8 +52,6 @@ public class CustomerRestController {
 		}
 	}
 	
-	
-
 	// Get Customer
 
 	@GetMapping("/customer/{customerId}")
@@ -66,11 +64,10 @@ public class CustomerRestController {
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		} 
 		catch (Exception e) {
-			ControllerException ce = new ControllerException("622",
+			ControllerException ce = new ControllerException("602",
 					"something went wrong in controller while fetching");
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		}
-
 	}
 
 	// Update Customer
@@ -84,7 +81,7 @@ public class CustomerRestController {
 			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			ControllerException ce = new ControllerException("622",
+			ControllerException ce = new ControllerException("603",
 					"something went wrong in controller while updating");
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		}
@@ -102,7 +99,7 @@ public class CustomerRestController {
 			ControllerException ce = new ControllerException(e.getErrorCode(), e.getErrorMessage());
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			ControllerException ce = new ControllerException("622",
+			ControllerException ce = new ControllerException("604",
 					"something went wrong in controller while deleting");
 			return new ResponseEntity<ControllerException>(ce, HttpStatus.BAD_REQUEST);
 		}
